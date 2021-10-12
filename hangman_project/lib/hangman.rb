@@ -61,8 +61,7 @@ class Hangman
   end
 
   def win?
-    debugger
-    if @guess_word == @secret_word
+    if @guess_word == @secret_word.split("")
       p "WIN"
       return true
     else
@@ -87,7 +86,4 @@ class Hangman
       return false
     end
   end
-
-    
-
 end
