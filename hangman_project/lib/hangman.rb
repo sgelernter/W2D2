@@ -1,3 +1,5 @@
+require "byebug"
+
 class Hangman
   DICTIONARY = ["cat", "dog", "bootcamp", "pizza"]
 
@@ -42,17 +44,50 @@ class Hangman
       return false
     else
       @attempted_chars << char
-      matches = get_matching_indices(char)
-      if matches == []
+      match_indices = get_matching_indices(char)
+      if match_indices == []
         @remaining_incorrect_guesses -= 1
       else
-        fill_indices(char, matches)
+        fill_indices(char, match_indices)
       end
       return true
     end
   end 
 
   def ask_user_for_guess
+    p "Enter a char:"
+    guess = gets.chomp
+    try_guess(guess)
+  end
+
+  def win?
+    debugger
+    if @guess_word == @secret_word
+      p "WIN"
+      return true
+    else
+      return false
+    end
+  end
+
+  def lose?
+    if @remaining_incorrect_guesses == 0
+      p "LOSE"
+      return true
+    else
+      return false
+    end
+  end
+
+  def game_over?
+    if win? || lose?
+      p @secret_word
+      return true
+    else
+      return false
+    end
+  end
+
     
 
 end
